@@ -1,0 +1,25 @@
+
+interface GithubService{
+
+const val GITHUB_BASE_URL="https://api.github.com/"
+
+  @GET ( "users"/{user]/repos")
+  fun getREpos(@Path("user")user:String):Deferred<Response<List<GitHubRepo>>>
+  
+  companion object{
+    
+    fun getGithubService():GithubService{
+      return RetroFit
+      .Builder()
+      .baseUrl(GITHUB_BASE_URL)
+      .addConverterFactory(MoshiConverterFactory.create())
+      .addCallAdapterFactory(CoroutineCallAdapterFactory())
+      .build()
+      .create(GithubService::class.java)
+      
+    }
+  }
+  
+}
+  
+  
