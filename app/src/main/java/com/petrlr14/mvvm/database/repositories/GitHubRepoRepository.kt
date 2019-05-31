@@ -21,4 +21,7 @@ class GitHubRepoRepository (private val repoDao:GitHubDAO){
         return repoDao.nukeTable()
     }
 
+    fun retrieveReposAsync(user: String): Deferred<Response<List<GitHubRepo>>>{
+        return GithubService.getGithubiService().getRepos(user)
+    }
 }
